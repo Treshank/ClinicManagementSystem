@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{{ title }}</title>
+		<link rel="stylesheet" media="screen" href="../static/bootstrap.min.css">
+		<link rel="shortcut icon" href="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Login</h1>
+			<form action="" method="post" novalidate>
+				{{ form.hidden_tag() }}
+				<div class="form-group">
+					<label >{{form.username.label}}</label>
+						<p>{{form.username(size=32, placeholder='username') }}
+						{% for error in form.username.errors %}
+            				<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}</p>
+					<br>
+					<label >{{form.password.label}}</label>
+					<p>	{{ form.password(size=32, placeholder='password') }}
+							{% for error in form.password.errors %}
+            				<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}</p>
+					<br>
+					<p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+					<p>{{ form.submit(class="btn btn-success") }}</p>
+				</div>
+			</form>
+			<p> {{ msg }}</p>
+		</div>
+	</body>
+</html>

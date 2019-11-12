@@ -1,0 +1,63 @@
+{%  extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Billing</h1>
+    <form action="" method="post" novalidate>
+        {{form.hidden_tag()}}
+        <div class="form-group custom-control custom-checkbox">
+        <p>
+            <label>{{ form.app_id.label }}</label>
+            {{ form.app_id(size=32) }}<br>
+            {% for error in form.app_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            <label>{{ form.doc_id.label }}</label>
+            {{ form.doc_id(size=32) }}<br>
+            {% for error in form.doc_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+             <p>
+            <label>{{ form.pat_id.label }}</label>
+            {{ form.pat_id(size=32) }}<br>
+            {% for error in form.pat_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+             <p>
+            <label>{{ form.consultation.label }}</label>
+            {{ form.consultation(type="checkbox") }}<br>
+            {% for error in form.consultation.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+            <p>
+            <label>{{ form.health_check.label }}</label>
+            {{ form.health_check(type="checkbox") }}<br>
+            {% for error in form.health_check.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+            <p>
+            <label>{{ form.test_set1.label }}</label>
+            {{ form.test_set1(type="checkbox") }}<br>
+            {% for error in form.test_set1.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+            <p>
+            <label>{{ form.test_set2.label }}</label>
+            {{ form.test_set2(type="checkbox") }}<br>
+            {% for error in form.test_set2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+             <p>{{ form.submit(class="btn btn-success") }}</p>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,240 @@
+{%  extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Add appointment</h1>
+    <form action="" method="post" novalidate>
+        {{form.hidden_tag()}}
+        <div class="form-group">
+            <p>
+            {{ form.p_id.label }}<br>
+            {{ form.p_id(size=32) }}<br>
+            {% for error in form.p_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+            <p>{{ form.submit(class="btn btn-success") }}</p>
+        </div>
+    </form>
+</div>
+
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">id:doctor</th>
+            <th scope="col">9:00-9:30am <br> 1</th>
+            <th scope="col">9:30-10:00am <br> 2</th>
+            <th scope="col">10:00-10:30am <br> 3</th>
+            <th scope="col">10:30-11:00am <br> 4</th>
+            <th scope="col">short break</th>
+            <th scope="col">11:30-12:00am <br> 5</th>
+            <th scope="col">12:00-12:30am <br> 6</th>
+            <th scope="col">12:30-1:00am <br> 7</th>
+            <th scope="col"> break </th>
+            <th scope="col">4:00-4:30am <br> 8</th>
+            <th scope="col">4:30-5:00am <br> 9</th>
+            <th scope="col">5:00-5:30am <br> 10</th>
+            <th scope="col">5:30-6:00am <br> 11</th>
+            <th scope="col">short break</th>
+            <th scope="col">6:30-7:00am <br> 12</th>
+            <th scope="col">7:00-7:30am <br> 13</th>
+            <th scope="col">7:30-8:00am <br> 14</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for row in data %}
+    <tr>
+        <th scope="row">{{ row[0] }}: {{row[1] }}</th>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==1 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+            <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=1) }}">Free</a>
+            {% endif %}
+        </td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==2 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=2) }}">Free</a>
+            {% endif %}
+        </td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==3 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=3) }}">Free</a>
+            {% endif %}
+        </td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==4 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=4) }}">Free</a>
+            {% endif %}</td>
+        <td>#</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==5 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=5) }}">Free</a>
+            {% endif %}</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==6 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=6) }}">Free</a>
+            {% endif %}</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==7 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=7) }}">Free</a>
+            {% endif %}</td>
+        <td>#</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==8 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=8) }}">Free</a>
+            {% endif %}</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==9 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=9) }}">Free</a>
+            {% endif %}</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==10 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=10) }}">Free</a>
+            {% endif %}</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==11 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=11) }}">Free</a>
+            {% endif %}</td>
+        <td>#</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==12 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=12) }}">Free</a>
+            {% endif %}</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==13 %}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+                <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=13) }}">Free</a>
+            {% endif %}</td>
+        <td>{% set f = namespace(value=False) %}
+            {% for rowa in dataa %}
+                {% if rowa[0]== row[0] %}
+                    {% if rowa[1]==14 .up%}
+                        {% set f.value = True %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if f.value %}
+                Booked
+            {% else %}
+             <a href="{{ url_for('appointment1',d=d, d_id=row[0],t=14) }}">Free</a>
+            {% endif %}</td>
+    </tr>
+    {% endfor %}
+   </tbody>
+</table>
+{% endblock %}
