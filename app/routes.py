@@ -62,10 +62,13 @@ def register():
             flash("That username is already taken, please choose another")
             return redirect(url_for('register'))
         else:
-            c.execute("INSERT INTO user (username, password, email, first_name, last_name, address, phone_no) "
-                      "VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                      (username, password, email, form.first_name.data, form.last_name.data, form.address.data,
-                       form.phone_no.data))
+            c.execute("INSERT INTO user (username, password) values(%s, %s);", (username, password))
+            db.connection.insert_id()
+            id = c.lastrowid
+            c.execute("INSERT INTO employee(email, first_name, last_name, address, phone_no, user_id_ref) "
+                      "VALUES (%s, %s, %s, %s, %s, %s);",
+                      (email, form.first_name.data, form.last_name.data, form.address.data,
+                       form.phone_no.data, id))
             flash("user registered!!")
             db.connection.commit()
             c.close()
@@ -80,11 +83,12 @@ def home():
     posts = [
         {
             'author': {'username': 'Admin'},
-            'body': 'Here any notices and/or change logs will be posted'
+            'body': 'The new database version fixing minor bugs'
         },
         {
             'author': {'username': 'Manager'},
-            'body': 'Any announcements also can be posted'
+            'body': 'Dr. Prasad has applied for a leave for 5days. No appointments to be booked under his name.\n'
+                    'All existing appointments to be given over to Dr. Ramesh '
         }]
     return render_template('home.html', title='Home', msg=msg, posts=posts)
 
@@ -100,9 +104,8 @@ def patient_form():
                          (form.first_name.data, form.last_name.data, form.email.data, form.address.data,
                           form.phone_no.data, form.occupation.data, int(session['user_id'])))
         db.connection.commit()
-        db.connection.close()
+        #db.connection.close()
         flash("Patient created with name {}".format(form.first_name.data))
-        c.close()
         return redirect(url_for('home'))
     return render_template('patient_form.html', title='New Patient', form=form)
 
@@ -170,7 +173,7 @@ def doctor_form():
                          (form.first_name.data, form.last_name.data, form.email.data, form.address.data,
                           form.phone_no.data, form.specialization.data, form.dept.data))
         db.connection.commit()
-        flash("Patient created with name {} and id {}", format(form.first_name.data, str(data)))
+        flash("Doctor created with name {}", format(form.first_name.data,))
         c.close()
         return redirect(url_for('home'))
     return render_template('doctor_form.html', title='New Doctor', form=form)
@@ -278,14 +281,11 @@ def billing():
                                                                       int(form.health_check.data),
                                                                       int(form.test_set1.data),
                                                                       int(form.test_set2.data)))
-        db.connection.commit()
+        db.connection.insert_id()
+        b_id = c.lastrowid
+        c.execute("call calc_total({})".format(b_id))
         c.close()
-        c = db.connection.cursor()
-        c.execute("select bill_id from bill where app_id={}".format(form.app_id.data))
-        b_id = c.fetchone()[0]
-        data = c.execute("call calc_total({})".format(b_id))
         db.connection.commit()
-        c.close()
         return redirect(url_for('bill', id=b_id))
     return render_template('billing.html', form=form, title="Billing")
 
