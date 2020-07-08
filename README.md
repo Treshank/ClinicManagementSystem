@@ -1,4 +1,4 @@
 # ClinicManagementSystem
-Half baked dbms project
+DBMS Project.
 
 There are bugs..
